@@ -4,7 +4,7 @@
 SHELL := /bin/bash
 BASEDIR := $(shell echo $${PWD})
 VERSION := $(shell git describe --always)
-URL := https://pinpt.github.com/charts
+URL := https://pinpt.github.io/charts
 
 .PHONY: build
 build: install-helm
