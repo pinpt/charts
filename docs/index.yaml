@@ -1,13 +1,13 @@
 apiVersion: v1
 entries:
   oklog:
-  - created: 2018-01-11T10:47:54.235259938-08:00
+  - created: 2018-01-11T10:59:50.42486951-08:00
     description: This chart contains the Pinpoint OKLog chart
-    digest: 83608a4becf208217409da7e0cd79209f594fdc0604f63a7ea4e6cfe187bc8df
-    home: https://pinpt.github.com/charts
+    digest: 67df9819e87752e989821f685d480563fa0a00c523c6c88140f7c98d94524da7
+    home: https://pinpt.github.io/charts
     icon: https://pinpt.com/assets/images/pinpoint.svg
     name: oklog
     urls:
     - https://pinpt.github.com/charts/oklog-1.0.0.tgz
     version: 1.0.0
-generated: 2018-01-11T10:47:54.234618272-08:00
+generated: 2018-01-11T10:59:50.424428775-08:00

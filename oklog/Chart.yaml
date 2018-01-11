@@ -1,5 +1,5 @@
 name: oklog
-home: https://pinpt.github.com/charts
+home: https://pinpt.github.io/charts
 # version will be automatically updated during packaging with the right version
 version: 1.0.0
 description: This chart contains the Pinpoint OKLog chart
