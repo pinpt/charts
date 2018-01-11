@@ -1,0 +1,23 @@
+oklog:
+  image:
+    repository: oklog/oklog
+    tag: "v0.2.1"
+    pullPolicy: IfNotPresent
+  # The number of log collection service replicas. Should be a minimum of 3.
+  replicas: 3
+  service:
+    # The Service Type for the log collection service. Possible values are ClusterIP, NodePort.
+    type: ClusterIP
+  config:
+    # The number of hours to retain the internal log collection service log files.
+    retention: "168h"
+    # The numer of copies of each segment to replicate for log replication across the cluster for the internal log collection service log files. Should be at least 2.
+    replicationFactor: 2
+    # The number of hours before purging deleted segment files for the internal log collection service.
+    purge: "24h"
+    # The number of bytes to try and keep store segments for the internal log collection service.
+    targetSize: "134217728"
+  resources:
+    requests:
+      memory: 128Mi
+      cpu: 125m
