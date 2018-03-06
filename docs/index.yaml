@@ -1,7 +1,28 @@
 apiVersion: v1
 entries:
+  mysql:
+  - apiVersion: v1
+    appVersion: "1.0"
+    created: 2018-03-06T17:27:19.14065-05:00
+    description: This chart contains the Pinpoint mysql chart
+    digest: 0afeac5e9ededf952b2f7e2ff705e5435d692db0ae72215ad055de0fc7e0a6a0
+    home: https://pinpt.github.io/charts
+    icon: https://pinpt.com/assets/images/pinpoint.sv
+    name: mysql
+    urls:
+    - https://pinpt.github.io/charts/mysql-1.1.0.tgz
+    version: 1.1.0
   oklog:
-  - created: 2018-01-11T11:33:57.079710114-08:00
+  - created: 2018-03-06T17:27:19.141359-05:00
+    description: This chart contains the Pinpoint OKLog chart
+    digest: 93213d0f1e2538617d8616b97c30439c34b9c4b5772566d3e0e131ed9682e71e
+    home: https://pinpt.github.io/charts
+    icon: https://pinpt.com/assets/images/pinpoint.svg
+    name: oklog
+    urls:
+    - https://pinpt.github.io/charts/oklog-1.1.0.tgz
+    version: 1.1.0
+  - created: 2018-03-06T17:27:19.141152-05:00
     description: This chart contains the Pinpoint OKLog chart
     digest: 67df9819e87752e989821f685d480563fa0a00c523c6c88140f7c98d94524da7
     home: https://pinpt.github.io/charts
@@ -10,4 +31,4 @@ entries:
     urls:
     - https://pinpt.github.io/charts/oklog-1.0.0.tgz
     version: 1.0.0
-generated: 2018-01-11T11:33:57.079328555-08:00
+generated: 2018-03-06T17:27:19.14005-05:00
