@@ -1,5 +1,8 @@
 apiVersion: v1
 appVersion: "1.0"
-description: A Helm chart for Kubernetes
 name: mysql
+home: https://pinpt.github.io/charts
+# version will be automatically updated during packaging with the right version
 version: 0.3.4
+description: This chart contains the Pinpoint mysql chart
+icon: https://pinpt.com/assets/images/pinpoint.sv
