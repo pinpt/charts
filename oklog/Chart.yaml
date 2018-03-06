@@ -1,6 +1,6 @@
 name: oklog
 home: https://pinpt.github.io/charts
 # version will be automatically updated during packaging with the right version
-version: 1.0.0
+version: 1.0.1
 description: This chart contains the Pinpoint OKLog chart
 icon: https://pinpt.com/assets/images/pinpoint.svg

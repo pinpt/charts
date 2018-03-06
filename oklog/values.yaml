@@ -21,3 +21,7 @@ oklog:
     requests:
       memory: 128Mi
       cpu: 125m
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
