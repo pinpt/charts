@@ -9,6 +9,7 @@ URL := https://pinpt.github.io/charts
 .PHONY: build
 build: install-helm
 	@helm package oklog -d $(BASEDIR)/docs --version $(VERSION)
+	@helm package mysql -d $(BASEDIR)/docs --version $(VERSION)
 	@helm repo index $(BASEDIR)/docs --url $(URL)
 
 .PHONY: install-helm
