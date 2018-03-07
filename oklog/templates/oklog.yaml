@@ -62,6 +62,31 @@ spec:
     app: {{ template "pinpt.full_name" . }}-oklog
 
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "pinpt.full_name" . }}-oklog-lb
+  labels:
+    app: {{ template "pinpt.full_name" . }}-oklog-lb
+    component: oklog
+    {{- include "pinpt.release_labels" . | indent 4 }}
+  annotations:
+{{ toYaml .Values.oklog.annotations | indent 4 }}
+spec:
+  ports:
+    - name: api
+      port: 7650
+      targetPort: 7650
+      protocol: TCP
+    - name: ingest-fast
+      port: 7651
+      targetPort: 7651
+      protocol: TCP
+  type: "{{ .Values.oklog.serviceType }}"
+  selector:
+    app: {{ template "pinpt.full_name" . }}-oklog
+
+---
 apiVersion: apps/v1beta1
 kind: StatefulSet
 metadata:
@@ -113,8 +138,8 @@ spec:
             - /bin/sh
             - /go/bin/start.sh
           volumeMounts:
-            # - name: export
-            #   mountPath: /data
+            - name: export
+              mountPath: /data
             - name: oklog-configmap
               mountPath: /go/bin/start.sh
               subPath: start.sh
@@ -131,3 +156,13 @@ spec:
               containerPort: 7659
           resources:
 {{ toYaml .Values.oklog.resources | indent 12}}
+  volumeClaimTemplates:
+  - metadata:
+      name: export
+    spec:
+      accessModes:
+        - "ReadWriteOnce"
+      resources:
+        requests:
+          storage: "100Gi"
+      storageClassName: "gp2"

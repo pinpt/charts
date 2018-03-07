@@ -10,7 +10,7 @@ oklog:
     type: ClusterIP
   config:
     # The number of hours to retain the internal log collection service log files.
-    retention: "168h"
+    retention: "336h"
     # The numer of copies of each segment to replicate for log replication across the cluster for the internal log collection service log files. Should be at least 2.
     replicationFactor: 2
     # The number of hours before purging deleted segment files for the internal log collection service.
@@ -22,6 +22,9 @@ oklog:
       memory: 128Mi
       cpu: 125m
 
+  serviceType: LoadBalancer  # [ClusterIP|LoadBalancer]
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
 nodeSelector: {}
 tolerations: []
 affinity: {}
