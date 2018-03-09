@@ -141,7 +141,7 @@ spec:
             - /bin/sh
             - /go/bin/start.sh
           volumeMounts:
-{{- if and .Values.persistence.enabled }}
+{{- if .Values.persistence.enabled }}
             - name: export
               mountPath: {{ .Values.persistence.mountPath }}
 {{- end }}
@@ -161,7 +161,7 @@ spec:
               containerPort: 7659
           resources:
 {{ toYaml .Values.oklog.resources | indent 12}}
-{{- if and .Values.persistence.enabled }}
+{{- if  .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
       name: export
