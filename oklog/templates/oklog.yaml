@@ -61,6 +61,7 @@ spec:
   selector:
     app: {{ template "pinpt.full_name" . }}-oklog
 
+{{- if .Values.loadBalancerService.enabled }}
 ---
 apiVersion: v1
 kind: Service
@@ -70,8 +71,10 @@ metadata:
     app: {{ template "pinpt.full_name" . }}-oklog-lb
     component: oklog
     {{- include "pinpt.release_labels" . | indent 4 }}
+{{- if .Values.loadBalancerService.annotations }}
   annotations:
-{{ toYaml .Values.oklog.annotations | indent 4 }}
+{{ toYaml .Values.loadBalancerService.annotations | indent 4 }}
+{{- end}}
 spec:
   ports:
     - name: api
@@ -82,10 +85,10 @@ spec:
       port: 7651
       targetPort: 7651
       protocol: TCP
-  type: "{{ .Values.oklog.serviceType }}"
+  type: LoadBalancer
   selector:
     app: {{ template "pinpt.full_name" . }}-oklog
-
+{{- end }}
 ---
 apiVersion: apps/v1beta1
 kind: StatefulSet
@@ -138,8 +141,10 @@ spec:
             - /bin/sh
             - /go/bin/start.sh
           volumeMounts:
+{{- if and .Values.persistence.enabled }}
             - name: export
-              mountPath: /data
+              mountPath: {{ .Values.persistence.mountPath }}
+{{- end }}
             - name: oklog-configmap
               mountPath: /go/bin/start.sh
               subPath: start.sh
@@ -156,13 +161,21 @@ spec:
               containerPort: 7659
           resources:
 {{ toYaml .Values.oklog.resources | indent 12}}
+{{- if and .Values.persistence.enabled }}
   volumeClaimTemplates:
   - metadata:
       name: export
     spec:
       accessModes:
-        - "ReadWriteOnce"
+        - {{ .Values.persistence.accessMode | quote }}
       resources:
         requests:
-          storage: "100Gi"
-      storageClassName: "gp2"
+          storage: {{ .Values.persistence.size | quote }}
+{{- if .Values.persistence.storageClass}}
+{{- if (eq "-" .Values.persistence.storageClass) }}
+      storageClassName: ""
+{{- else }}
+      storageClassName: "{{ .Values.persistence.storageClass }}"
+{{- end -}}
+{{- end -}}
+{{- end -}}

@@ -1,7 +1,7 @@
 oklog:
   image:
     repository: oklog/oklog
-    tag: "v0.2.1"
+    tag: "v0.3.0"
     pullPolicy: IfNotPresent
   # The number of log collection service replicas. Should be a minimum of 3.
   replicas: 3
@@ -11,7 +11,7 @@ oklog:
   config:
     # The number of hours to retain the internal log collection service log files.
     retention: "336h"
-    # The numer of copies of each segment to replicate for log replication across the cluster for the internal log collection service log files. Should be at least 2.
+    # The number of copies of each segment to replicate for log replication across the cluster for the internal log collection service log files. Should be at least 2.
     replicationFactor: 2
     # The number of hours before purging deleted segment files for the internal log collection service.
     purge: "24h"
@@ -22,9 +22,23 @@ oklog:
       memory: 128Mi
       cpu: 125m
 
-  serviceType: LoadBalancer  # [ClusterIP|LoadBalancer]
+# Enable to add load balanced service.
+# Example annotation will create AWS internal LoadBalancer.
+# Ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
+loadBalancerService:
+  enabled: false
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+
+
+## Persist data to a persitent volume
+persistence:
+  enabled: false
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 100Gi
+  mountPath: /data
+
 nodeSelector: {}
 tolerations: []
 affinity: {}
