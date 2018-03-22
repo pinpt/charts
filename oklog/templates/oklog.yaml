@@ -22,6 +22,8 @@ data:
       -store.segment-replication-factor {{ .Values.oklog.config.replicationFactor }} \
       -store.segment-retain {{ .Values.oklog.config.retention }} \
       -store.segment-purge {{ .Values.oklog.config.purge }} \
+      -ingest.path               /data/ingest \
+      -store.path                /data/store \
      {{- range $i := until $nodeCount }}
       -peer {{ template "pinpt.full_name" $ }}-oklog-{{$i}}.{{ template "pinpt.full_name" $ }}-oklog.{{ $.Release.Namespace }}.svc.cluster.local:7659 \
      {{- end }}
