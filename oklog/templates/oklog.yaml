@@ -12,12 +12,12 @@ data:
   start.sh: |
      #!/bin/sh
      /oklog ingeststore \
-      -api tcp://0.0.0.0:7650 \
-      -ingest.fast tcp://0.0.0.0:7651 \
-      -ingest.durable tcp://0.0.0.0:7652 \
-      -ingest.bulk tcp://0.0.0.0:7653 \
+      -api tcp://${POD_IP}:7650 \
+      -ingest.fast tcp://${POD_IP}:7651 \
+      -ingest.durable tcp://${POD_IP}:7652 \
+      -ingest.bulk tcp://${POD_IP}:7653 \
       -debug \
-      -cluster tcp://$POD_IP:7659 \
+      -cluster tcp://${POD_IP}:7659 \
       -store.segment-target-size {{ .Values.oklog.config.targetSize }} \
       -store.segment-replication-factor {{ .Values.oklog.config.replicationFactor }} \
       -store.segment-retain {{ .Values.oklog.config.retention }} \
@@ -60,6 +60,10 @@ spec:
       port: 7659
       targetPort: 7659
       protocol: TCP
+    - name: ingest-cluster-udp
+      port: 7659
+      targetPort: 7659
+      protocol: UDP
   selector:
     app: {{ template "pinpt.full_name" . }}-oklog
 
