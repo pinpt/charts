@@ -25,4 +25,4 @@ Add a new subfolder, modify the makefile, and update the index.html.
 
 ## Legal
 
-Copyright (c) 2018 by PinPT, Inc. All source code available in this repository are public domain.
+Copyright (c) 2018-2019 by Pinpoint Software, Inc. All source code available in this repository are public domain.
